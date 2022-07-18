@@ -386,6 +386,7 @@ class GaussianDiffusion:
         self,
         model,
         shape,
+        callback,
         noise=None,
         clip_denoised=True,
         denoised_fn=None,
@@ -413,6 +414,7 @@ class GaussianDiffusion:
         for sample in self.p_sample_loop_progressive(
             model,
             shape,
+            callback,
             noise=noise,
             clip_denoised=clip_denoised,
             denoised_fn=denoised_fn,
@@ -427,6 +429,7 @@ class GaussianDiffusion:
         self,
         model,
         shape,
+        callback,
         noise=None,
         clip_denoised=True,
         denoised_fn=None,
@@ -469,6 +472,7 @@ class GaussianDiffusion:
                 )
                 yield out
                 img = out["sample"]
+                callback(img)
 
     def ddim_sample(
         self,
